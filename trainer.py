@@ -1,11 +1,11 @@
 import dataloader as DL
+import ipdb
 from config import config
 import network as net
 from math import floor, ceil
 import os, sys
 import torch
 import torchvision.transforms as transforms
-from torch.autograd import Variable
 from torch.optim import Adam
 from tqdm import tqdm
 import tf_recorder as tensorboard
@@ -16,7 +16,7 @@ import numpy as np
 class trainer:
     def __init__(self, config):
         self.config = config
-        if torch.cuda.is_available():
+        if True:#torch.cuda.is_available():
             self.use_cuda = True
             torch.set_default_tensor_type('torch.cuda.FloatTensor')
         else:
@@ -171,8 +171,8 @@ class trainer:
         self.z = torch.FloatTensor(self.loader.batchsize, self.nz)
         self.x = torch.FloatTensor(self.loader.batchsize, 3, self.loader.imsize, self.loader.imsize)
         self.x_tilde = torch.FloatTensor(self.loader.batchsize, 3, self.loader.imsize, self.loader.imsize)
-        self.real_label = torch.FloatTensor(self.loader.batchsize).fill_(1)
-        self.fake_label = torch.FloatTensor(self.loader.batchsize).fill_(0)
+        self.real_label = torch.FloatTensor(self.loader.batchsize,1).fill_(1)
+        self.fake_label = torch.FloatTensor(self.loader.batchsize,1).fill_(0)
 
         # enable cuda
         if self.use_cuda:
@@ -184,11 +184,11 @@ class trainer:
             torch.cuda.manual_seed(config.random_seed)
 
         # wrapping autograd Variable.
-        self.x = Variable(self.x)
-        self.x_tilde = Variable(self.x_tilde)
-        self.z = Variable(self.z)
-        self.real_label = Variable(self.real_label)
-        self.fake_label = Variable(self.fake_label)
+#        self.x = self.x
+#        self.x_tilde = self.x_tilde
+#        self.z = self.z
+#        self.real_label = self.real_label
+#        self.fake_label = self.fake_label
         
         # ship new model to cuda.
         if self.use_cuda:
@@ -228,12 +228,12 @@ class trainer:
             return x
 
         if hasattr(self, '_d_'):
-            self._d_ = self._d_ * 0.9 + torch.mean(self.fx_tilde).data[0] * 0.1
+            self._d_ = self._d_ * 0.9 + torch.mean(self.fx_tilde).data.item() * 0.1
         else:
             self._d_ = 0.0
         strength = 0.2 * max(0, self._d_ - 0.5)**2
         z = np.random.randn(*x.size()).astype(np.float32) * strength
-        z = Variable(torch.from_numpy(z)).cuda() if self.use_cuda else Variable(torch.from_numpy(z))
+        z = torch.from_numpy(z).cuda() if self.use_cuda else torch.from_numpy(z)
         return x + z
 
 
@@ -242,7 +242,6 @@ class trainer:
         self.z_test = torch.FloatTensor(self.loader.batchsize, self.nz)
         if self.use_cuda:
             self.z_test = self.z_test.cuda()
-        self.z_test = Variable(self.z_test, volatile=True)
         self.z_test.data.resize_(self.loader.batchsize, self.nz).normal_(0.0, 1.0)
         
         
@@ -270,6 +269,7 @@ class trainer:
                
                 self.fx = self.D(self.x)
                 self.fx_tilde = self.D(self.x_tilde.detach())
+                #ipdb.set_trace()
                 loss_d = self.mse(self.fx, self.real_label) + self.mse(self.fx_tilde, self.fake_label)
 
                 loss_d.backward()
@@ -282,7 +282,7 @@ class trainer:
                 self.opt_g.step()
 
                 # logging.
-                log_msg = ' [E:{0}][T:{1}][{2:6}/{3:6}]  errD: {4:.4f} | errG: {5:.4f} | [lr:{11:.5f}][cur:{6:.3f}][resl:{7:4}][{8}][{9:.1f}%][{10:.1f}%]'.format(self.epoch, self.globalTick, self.stack, len(self.loader.dataset), loss_d.data[0], loss_g.data[0], self.resl, int(pow(2,floor(self.resl))), self.phase, self.complete['gen'], self.complete['dis'], self.lr)
+                log_msg = ' [E:{0}][T:{1}][{2:6}/{3:6}]  errD: {4:.4f} | errG: {5:.4f} | [lr:{11:.5f}][cur:{6:.3f}][resl:{7:4}][{8}][{9:.1f}%][{10:.1f}%]'.format(self.epoch, self.globalTick, self.stack, len(self.loader.dataset), loss_d.data.item(), loss_g.data.item(), self.resl, int(pow(2,floor(self.resl))), self.phase, self.complete['gen'], self.complete['dis'], self.lr)
                 tqdm.write(log_msg)
 
                 # save model.
@@ -290,7 +290,10 @@ class trainer:
 
                 # save image grid.
                 if self.globalIter%self.config.save_img_every == 0:
-                    x_test = self.G(self.z_test)
+                    #ipdb.set_trace()
+                    y_test = self.G(self.z_test)
+                    with torch.no_grad():
+                        x_test = self.G(self.z_test)
                     os.system('mkdir -p repo/save/grid')
                     utils.save_image_grid(x_test.data, 'repo/save/grid/{}_{}_G{}_D{}.jpg'.format(int(self.globalIter/self.config.save_img_every), self.phase, self.complete['gen'], self.complete['dis']))
                     os.system('mkdir -p repo/save/resl_{}'.format(int(floor(self.resl))))
@@ -299,9 +302,10 @@ class trainer:
 
                 # tensorboard visualization.
                 if self.use_tb:
-                    x_test = self.G(self.z_test)
-                    self.tb.add_scalar('data/loss_g', loss_g.data[0], self.globalIter)
-                    self.tb.add_scalar('data/loss_d', loss_d.data[0], self.globalIter)
+                    with torch.no_grad():
+                        x_test = self.G(self.z_test)
+                    self.tb.add_scalar('data/loss_g', loss_g.data.item(), self.globalIter)
+                    self.tb.add_scalar('data/loss_d', loss_d.data.item(), self.globalIter)
                     self.tb.add_scalar('tick/lr', self.lr, self.globalIter)
                     self.tb.add_scalar('tick/cur_resl', int(pow(2,floor(self.resl))), self.globalIter)
                     self.tb.add_image_grid('grid/x_test', 4, utils.adjust_dyn_range(x_test.data.float(), [-1,1], [0,1]), self.globalIter)
@@ -343,10 +347,10 @@ class trainer:
 
 
 ## perform training.
-print '----------------- configuration -----------------'
+print ('----------------- configuration -----------------')
 for k, v in vars(config).items():
-    print('  {}: {}').format(k, v)
-print '-------------------------------------------------'
+    print('  {}: {}'.format(k, v))
+print ('-------------------------------------------------')
 torch.backends.cudnn.benchmark = True           # boost speed.
 trainer = trainer(config)
 trainer.train()

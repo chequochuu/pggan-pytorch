@@ -1,0 +1,119 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ConcatTable	custom_layers.py	/^class ConcatTable(nn.Module):$/;"	c
+Discriminator	network.py	/^class Discriminator(nn.Module):$/;"	c
+Flatten	custom_layers.py	/^class Flatten(nn.Module):$/;"	c
+Generator	network.py	/^class Generator(nn.Module):$/;"	c
+__init__	custom_layers.py	/^    def __init__(self):$/;"	m	class:Flatten
+__init__	custom_layers.py	/^    def __init__(self):$/;"	m	class:pixelwise_norm_layer
+__init__	custom_layers.py	/^    def __init__(self, averaging='all'):$/;"	m	class:minibatch_std_concat_layer
+__init__	custom_layers.py	/^    def __init__(self, c_in, c_out, initializer='kaiming'):$/;"	m	class:equalized_linear
+__init__	custom_layers.py	/^    def __init__(self, c_in, c_out, k_size, stride, pad, initializer='kaiming'):$/;"	m	class:equalized_deconv2d
+__init__	custom_layers.py	/^    def __init__(self, c_in, c_out, k_size, stride, pad, initializer='kaiming', bias=False):$/;"	m	class:equalized_conv2d
+__init__	custom_layers.py	/^    def __init__(self, config):$/;"	m	class:fadein_layer
+__init__	custom_layers.py	/^    def __init__(self, layer1, layer2):$/;"	m	class:ConcatTable
+__init__	custom_layers.py	/^    def __init__(self, mode='mul', strength=0.4, axes=(0,1), normalize=False):$/;"	m	class:generalized_drop_out
+__init__	dataloader.py	/^    def __init__(self, config):$/;"	m	class:dataloader
+__init__	network.py	/^    def __init__(self, config):$/;"	m	class:Discriminator
+__init__	network.py	/^    def __init__(self, config):$/;"	m	class:Generator
+__init__	tf_recorder.py	/^    def __init__(self):$/;"	m	class:tf_recorder
+__init__	trainer.py	/^    def __init__(self, config):$/;"	m	class:trainer
+__iter__	dataloader.py	/^    def __iter__(self):$/;"	m	class:dataloader	file:
+__len__	dataloader.py	/^    def __len__(self):$/;"	m	class:dataloader	file:
+__next__	dataloader.py	/^    def __next__(self):$/;"	m	class:dataloader	file:
+__repr__	custom_layers.py	/^    def __repr__(self):$/;"	m	class:generalized_drop_out	file:
+__repr__	custom_layers.py	/^    def __repr__(self):$/;"	m	class:minibatch_std_concat_layer	file:
+add_graph	tf_recorder.py	/^    def add_graph(self, index, x_input, model):$/;"	m	class:tf_recorder
+add_image_grid	tf_recorder.py	/^    def add_image_grid(self, index, ngrid, x, niter):$/;"	m	class:tf_recorder
+add_image_single	tf_recorder.py	/^    def add_image_single(self, index, x, niter):$/;"	m	class:tf_recorder
+add_noise	trainer.py	/^    def add_noise(self, x):$/;"	m	class:trainer
+add_scalar	tf_recorder.py	/^    def add_scalar(self, index, val, niter):$/;"	m	class:tf_recorder
+add_scalars	tf_recorder.py	/^    def add_scalars(self, index, group_dict, niter):$/;"	m	class:tf_recorder
+adjust_dyn_range	utils.py	/^def adjust_dyn_range(x, drange_in, drange_out):$/;"	f
+alpha	generate_interpolated.py	/^    alpha = 1.0\/float(n_intp+1)$/;"	v
+checkpoint	generate_interpolated.py	/^checkpoint = torch.load(checkpoint_path)$/;"	v
+checkpoint_path	generate_interpolated.py	/^checkpoint_path = 'repo\/model\/gen_R8_T55.pth.tar'$/;"	v
+conv	network.py	/^def conv(layers, c_in, c_out, k_size, stride=1, pad=0, leaky=True, bn=False, wn=False, pixel=False, gdrop=True, only=False):$/;"	f
+dataloader	dataloader.py	/^class dataloader:$/;"	c
+deconv	network.py	/^def deconv(layers, c_in, c_out, k_size, stride=1, pad=0, leaky=True, bn=False, wn=False, pixel=False, only=False):$/;"	f
+deepcopy_module	network.py	/^def deepcopy_module(module, target):$/;"	f
+equalized_conv2d	custom_layers.py	/^class equalized_conv2d(nn.Module):$/;"	c
+equalized_deconv2d	custom_layers.py	/^class equalized_deconv2d(nn.Module):$/;"	c
+equalized_linear	custom_layers.py	/^class equalized_linear(nn.Module):$/;"	c
+export_json	tf_recorder.py	/^    def export_json(self, out_file):$/;"	m	class:tf_recorder
+fadein_layer	custom_layers.py	/^class fadein_layer(nn.Module):$/;"	c
+fake_im	generate_interpolated.py	/^    fake_im = test_model.module(z_intp)$/;"	v
+feed_interpolated_input	trainer.py	/^    def feed_interpolated_input(self, x):$/;"	m	class:trainer
+first_block	network.py	/^    def first_block(self):$/;"	m	class:Generator
+flush_network	network.py	/^    def flush_network(self):$/;"	m	class:Discriminator
+flush_network	network.py	/^    def flush_network(self):$/;"	m	class:Generator
+fname	generate_interpolated.py	/^    fname = os.path.join(name, '_intp{}.jpg'.format(i))$/;"	v
+forward	custom_layers.py	/^    def forward(self, x):$/;"	m	class:Flatten
+forward	custom_layers.py	/^    def forward(self, x):$/;"	m	class:equalized_conv2d
+forward	custom_layers.py	/^    def forward(self, x):$/;"	m	class:equalized_deconv2d
+forward	custom_layers.py	/^    def forward(self, x):$/;"	m	class:equalized_linear
+forward	custom_layers.py	/^    def forward(self, x):$/;"	m	class:fadein_layer
+forward	custom_layers.py	/^    def forward(self, x):$/;"	m	class:minibatch_std_concat_layer
+forward	custom_layers.py	/^    def forward(self, x):$/;"	m	class:pixelwise_norm_layer
+forward	custom_layers.py	/^    def forward(self, x, deterministic=False):$/;"	m	class:generalized_drop_out
+forward	custom_layers.py	/^    def forward(self,x):$/;"	m	class:ConcatTable
+forward	network.py	/^    def forward(self, x):$/;"	m	class:Discriminator
+forward	network.py	/^    def forward(self, x):$/;"	m	class:Generator
+freeze_layers	network.py	/^    def freeze_layers(self):$/;"	m	class:Discriminator
+freeze_layers	network.py	/^    def freeze_layers(self):$/;"	m	class:Generator
+from_rgb_block	network.py	/^    def from_rgb_block(self, ndim):$/;"	m	class:Discriminator
+generalized_drop_out	custom_layers.py	/^class generalized_drop_out(nn.Module):$/;"	c
+get_batch	dataloader.py	/^    def get_batch(self):$/;"	m	class:dataloader
+get_init_dis	network.py	/^    def get_init_dis(self):$/;"	m	class:Discriminator
+get_init_gen	network.py	/^    def get_init_gen(self):$/;"	m	class:Generator
+get_module_names	network.py	/^def get_module_names(model):$/;"	f
+get_state	trainer.py	/^    def get_state(self, target):$/;"	m	class:trainer
+grow_network	network.py	/^    def grow_network(self, resl):$/;"	m	class:Discriminator
+grow_network	network.py	/^    def grow_network(self, resl):$/;"	m	class:Generator
+intermediate_block	network.py	/^    def intermediate_block(self, resl):$/;"	m	class:Discriminator
+intermediate_block	network.py	/^    def intermediate_block(self, resl):$/;"	m	class:Generator
+irange	utils.py	/^irange = range$/;"	v
+last_block	network.py	/^    def last_block(self):$/;"	m	class:Discriminator
+linear	network.py	/^def linear(layers, c_in, c_out, sig=True, wn=False):$/;"	f
+load_model	utils.py	/^def load_model(net, path):$/;"	f
+make_grid	utils.py	/^def make_grid(tensor, nrow=8, padding=2,$/;"	f
+make_image_grid	utils.py	/^def make_image_grid(x, ngrid):$/;"	f
+make_summary	utils.py	/^def make_summary(writer, key, value, step):$/;"	f
+minibatch_std_concat_layer	custom_layers.py	/^class minibatch_std_concat_layer(nn.Module):$/;"	c
+n_intp	generate_interpolated.py	/^n_intp = 20$/;"	v
+name	generate_interpolated.py	/^    name = 'repo\/interpolation\/try_{}'.format(i)$/;"	v
+norm_ip	utils.py	/^        def norm_ip(img, min, max):$/;"	f	function:make_grid
+norm_range	utils.py	/^        def norm_range(t, range):$/;"	f	function:make_grid
+parser	config.py	/^parser = argparse.ArgumentParser('PGGAN')$/;"	v
+pixelwise_norm_layer	custom_layers.py	/^class pixelwise_norm_layer(nn.Module):$/;"	c
+renew	dataloader.py	/^    def renew(self, resl):$/;"	m	class:dataloader
+renew_everything	trainer.py	/^    def renew_everything(self):$/;"	m	class:trainer
+resize	utils.py	/^def resize(x, size):$/;"	f
+resl_scheduler	trainer.py	/^    def resl_scheduler(self):$/;"	m	class:trainer
+save_image	utils.py	/^def save_image(tensor, filename, nrow=8, padding=2,$/;"	f
+save_image_grid	utils.py	/^def save_image_grid(x, path, imsize=512, ngrid=4):$/;"	f
+save_image_single	utils.py	/^def save_image_single(x, path, imsize=512):$/;"	f
+save_model	utils.py	/^def save_model(net, path):$/;"	f
+snapshot	trainer.py	/^    def snapshot(self, path):$/;"	m	class:trainer
+soft_copy_param	network.py	/^def soft_copy_param(target_link, source_link, tau):$/;"	f
+test_model	generate_interpolated.py	/^    test_model = test_model.cuda()$/;"	v
+test_model	generate_interpolated.py	/^    test_model = torch.nn.DataParallel(test_model).cuda(device=0)$/;"	v
+test_model	generate_interpolated.py	/^test_model = net.Generator(config)$/;"	v
+tf_recorder	tf_recorder.py	/^class tf_recorder:$/;"	c
+to_rgb_block	network.py	/^    def to_rgb_block(self, c_in):$/;"	m	class:Generator
+train	trainer.py	/^    def train(self):$/;"	m	class:trainer
+trainer	trainer.py	/^class trainer:$/;"	c
+trainer	trainer.py	/^trainer = trainer(config)$/;"	v
+update_alpha	custom_layers.py	/^    def update_alpha(self, delta):$/;"	m	class:fadein_layer
+use_cuda	generate_interpolated.py	/^use_cuda = True$/;"	v
+z1	generate_interpolated.py	/^    z1 = z1.cuda()$/;"	v
+z1	generate_interpolated.py	/^z1 = torch.FloatTensor(1, config.nz).normal_(0.0, 1.0)$/;"	v
+z2	generate_interpolated.py	/^    z2 = z2.cuda()$/;"	v
+z2	generate_interpolated.py	/^z2 = torch.FloatTensor(1, config.nz).normal_(0.0, 1.0)$/;"	v
+z_intp	generate_interpolated.py	/^    z_intp = z_intp.cuda()$/;"	v
+z_intp	generate_interpolated.py	/^z_intp = Variable(z_intp)$/;"	v
+z_intp	generate_interpolated.py	/^z_intp = torch.FloatTensor(1, config.nz)$/;"	v

@@ -54,14 +54,3 @@ class dataloader:
         dataIter = iter(self.dataloader)
         return next(dataIter)[0].mul(2).add(-1)         # pixel range [-1, 1]
 
-
-        
-
-
-
-
-
-
-
-
-
